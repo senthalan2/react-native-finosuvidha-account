@@ -39,11 +39,11 @@ The `tools:replace` attribute is used to override `android:allowBackup` and `and
 
 ```js
 
-import { startAccountOpening } from  'react-native-finosuvidha-account';
+import { startAccount } from  'react-native-finosuvidha-account';
 
 // ...
 
-startAccountOpening(
+startAccount(
    encToken, // string
    lat, // string
    lng, // string
@@ -59,7 +59,7 @@ startAccountOpening(
 
 ## Response JSON Object
 
-`startAccountOpening()` Method Reponse
+`startAccount()` Method Reponse
 
 | Key               | Type    | 
 |-------------------|---------| 
