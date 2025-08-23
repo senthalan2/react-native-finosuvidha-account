@@ -43,12 +43,16 @@ import { startAccountOpening } from  'react-native-finosuvidha-account';
 
 // ...
 
-startAccountOpening(<enc_token>, <latitude>, <longitude>)
+startAccountOpening(
+   encToken, // string
+   lat, // string
+   lng, // string
+)
 	.then(res  =>  {
-		console.log(res,  'RESPONSE');
+		console.log(res,  'Response');
 	})
 	.catch(e  =>  {
-		console.log(e,  'ERROR');
+		console.log(e,  'Error');
 	});
 
 ```
