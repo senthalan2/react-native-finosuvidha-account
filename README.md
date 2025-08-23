@@ -64,6 +64,7 @@ startAccountOpening(<enc_token>, <latitude>, <longitude>)
 | message           | string  |
 
 
+
 ### ⚠️ Common Error: Manifest Merger Failed
 
 You might encounter the following error while building your project if you have installed the [react-native-paysprint-onboarding](https://www.npmjs.com/package/react-native-paysprint-onboarding)package:
@@ -74,6 +75,7 @@ value=(com.testapp.provider) from [dmt_casa_uat-release.aar] AndroidManifest.xml
 is also present at [onboardinglib-release.aar] AndroidManifest.xml:58:13-64 
 value=(com.testapp.fileprovider).
 ```
+
 
 #### ✅ Solution
 
@@ -96,6 +98,8 @@ Add the following `provider` entry inside the `application` tag of your `Android
 
 
 ```
+
+This resolves the manifest conflict by overriding the duplicated authorities attribute.
 
 ## Contributing
 
