@@ -4,11 +4,36 @@ This is a React Native module that provides a seamless integration of the Fino S
 
 ## Installation
 
+### Step 1
+
 ```sh
-
 npm  install  react-native-finosuvidha-account
-
 ```
+
+### Step 2
+
+#### Update `AndroidManifest.xml`
+
+In the `<manifest>` tag, add the `tools` namespace:
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+```
+
+In the `<application>` tag, add the `tools:replace` attribute:
+
+```xml
+<application
+    ...
+    tools:replace="android:allowBackup,android:theme">
+
+    ...
+</application>
+```
+
+**_Note: The `xmlns:tools` declaration must be in the root `<manifest>` tag
+The `tools:replace` attribute is used to override `android:allowBackup` and `android:theme` values defined by libraries, which otherwise may cause manifest merge conflicts._**
 
 ## Usage
 
