@@ -4,23 +4,29 @@ This is a React Native module that provides a seamless integration of the Fino S
 
 ## Installation
 
-
 ```sh
-npm install react-native-finosuvidha-account
-```
 
+npm  install  react-native-finosuvidha-account
+
+```
 
 ## Usage
 
-
 ```js
-import { multiply } from 'react-native-finosuvidha-account';
+
+import { startAccountOpening } from  'react-native-finosuvidha-account';
 
 // ...
 
-const result = multiply(3, 7);
-```
+startAccountOpening(<enc_token>, <latitude>, <longitude>)
+	.then(res  =>  {
+		console.log(res,  'RESPONSE');
+	})
+	.catch(e  =>  {
+		console.log(e,  'ERROR');
+	});
 
+```
 
 ## Contributing
 
@@ -33,5 +39,3 @@ const result = multiply(3, 7);
 MIT
 
 ---
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
