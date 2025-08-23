@@ -64,9 +64,9 @@ startAccountOpening(<enc_token>, <latitude>, <longitude>)
 | message           | string  |
 
 
-#### ⚠️ Common Error: Manifest Merger Failed
+### ⚠️ Common Error: Manifest Merger Failed
 
-You might encounter the following error while building your project if you have installed the [react-native-paysprint-onboarding]([CONTRIBUTING.md#development-workflow](https://www.npmjs.com/package/react-native-paysprint-onboarding))package:
+You might encounter the following error while building your project if you have installed the [react-native-paysprint-onboarding](https://www.npmjs.com/package/react-native-paysprint-onboarding)package:
 
 ```sh
 Manifest merger failed : Attribute provider#androidx.core.content.FileProvider@authorities 
