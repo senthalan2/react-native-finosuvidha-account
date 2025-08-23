@@ -53,6 +53,50 @@ startAccountOpening(<enc_token>, <latitude>, <longitude>)
 
 ```
 
+## Response JSON Object
+
+`startAccountOpening()` Method Reponse
+
+| Key               | Type    | 
+|-------------------|---------| 
+| status            | boolean |  
+| response          | number  |          |
+| message           | string  |
+
+
+#### ⚠️ Common Error: Manifest Merger Failed
+
+You might encounter the following error while building your project if you have installed the [react-native-paysprint-onboarding]([CONTRIBUTING.md#development-workflow](https://www.npmjs.com/package/react-native-paysprint-onboarding))package:
+
+```sh
+Manifest merger failed : Attribute provider#androidx.core.content.FileProvider@authorities 
+value=(com.testapp.provider) from [dmt_casa_uat-release.aar] AndroidManifest.xml:59:13-60 
+is also present at [onboardinglib-release.aar] AndroidManifest.xml:58:13-64 
+value=(com.testapp.fileprovider).
+```
+
+#### ✅ Solution
+
+Add the following `provider` entry inside the `application` tag of your `AndroidManifest.xml` (usually located at `android/app/src/main/AndroidManifest.xml`):
+
+```xml
+
+<application>
+
+     ...
+
+<provider
+    android:name="androidx.core.content.FileProvider"
+    android:authorities="${applicationId}.fileprovider"
+    android:exported="false"
+    android:grantUriPermissions="true"
+    tools:replace="android:authorities" />
+
+</application>
+
+
+```
+
 ## Contributing
 
 - [Development workflow](CONTRIBUTING.md#development-workflow)
