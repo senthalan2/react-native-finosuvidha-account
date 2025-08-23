@@ -71,9 +71,9 @@ You might encounter the following error while building your project if you have 
 
 ```sh
 Manifest merger failed : Attribute provider#androidx.core.content.FileProvider@authorities 
-value=(com.testapp.provider) from [dmt_casa_uat-release.aar] AndroidManifest.xml:59:13-60 
+value=(<your_package_name>.provider) from [dmt_casa_uat-release.aar] AndroidManifest.xml:59:13-60 
 is also present at [onboardinglib-release.aar] AndroidManifest.xml:58:13-64 
-value=(com.testapp.fileprovider).
+value=(<your_package_name>.fileprovider).
 ```
 
 
