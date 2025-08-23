@@ -1,0 +1,96 @@
+buildscript {
+  ext.getExtOrDefault = {name ->
+    return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['FinosuvidhaAccount_' + name]
+  }
+
+  repositories {
+    google()
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+  }
+
+  dependencies {
+    classpath "com.android.tools.build:gradle:8.7.2"
+    // noinspection DifferentKotlinGradleVersion
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${getExtOrDefault('kotlinVersion')}"
+  }
+}
+
+
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
+apply plugin: "com.facebook.react"
+
+def getExtOrIntegerDefault(name) {
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["FinosuvidhaAccount_" + name]).toInteger()
+}
+
+android {
+  namespace "com.finosuvidhaaccount"
+
+  compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
+
+  defaultConfig {
+    minSdkVersion getExtOrIntegerDefault("minSdkVersion")
+    targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
+    multiDexEnabled true
+  }
+
+  buildFeatures {
+    buildConfig true
+    viewBinding true
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+  }
+
+  lintOptions {
+    disable "GradleCompatible"
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  sourceSets {
+    main {
+      java.srcDirs += [
+        "generated/java",
+        "generated/jni"
+      ]
+    }
+  }
+}
+
+repositories {
+  mavenCentral()
+  google()
+  maven { url "https://jitpack.io" }
+}
+
+def kotlin_version = getExtOrDefault("kotlinVersion")
+
+dependencies {
+  implementation "com.facebook.react:react-android"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  implementation (files("libs/dmt_casa_uat-release.aar"))
+
+  implementation("com.google.android.material:material:1.12.0")
+  implementation ("io.github.chaosleung:pinview:1.4.4")
+  implementation ("androidx.databinding:viewbinding:8.0.0")
+  implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+  implementation ("com.squareup.retrofit2:adapter-rxjava2:2.3.0")
+  implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+  implementation ("com.google.code.gson:gson:2.8.2")
+  implementation("com.squareup.okhttp3:okhttp")
+  implementation("com.squareup.okhttp3:logging-interceptor")
+  implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
+
+
+}
