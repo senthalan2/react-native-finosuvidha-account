@@ -26,7 +26,7 @@ class FinosuvidhaAccountModule(reactContext: ReactApplicationContext) :
     return NAME
   }
 
-  override fun startAccountOpening(
+  override fun startAccount(
     encToken: String,
     lat: String,
     lng: String,

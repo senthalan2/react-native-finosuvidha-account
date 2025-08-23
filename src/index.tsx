@@ -1,10 +1,10 @@
 import FinosuvidhaAccount from './NativeFinosuvidhaAccount';
-import type { AccountOpeningResponseProps } from './types';
+import type { StartAccountResponseProps } from './types';
 
-export function startAccountOpening(
+export function startAccount(
   encToken: string,
   lat: string,
   lng: string
-): Promise<AccountOpeningResponseProps> {
-  return FinosuvidhaAccount.startAccountOpening(encToken, lat, lng);
+): Promise<StartAccountResponseProps> {
+  return FinosuvidhaAccount.startAccount(encToken, lat, lng);
 }
