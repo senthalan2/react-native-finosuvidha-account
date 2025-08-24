@@ -43,11 +43,11 @@ import { startAccount } from  'react-native-finosuvidha-account';
 
 // ...
 
-startAccount(
-   encToken, // string
-   lat, // string
-   lng, // string
-)
+  startAccount(
+     encToken, // string
+     lat, // string
+     lng, // string
+  )
 	.then(res  =>  {
 		console.log(res,  'Response');
 	})
