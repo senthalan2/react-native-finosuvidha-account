@@ -104,25 +104,36 @@ Now, add the following `<provider>` block inside the `<application>` tag of your
 
 ## Usage
 
+Before calling `startAccount()`, you need to obtain the `encToken`. 
+
+ - You can get the `encToken` from the **Paysprint Query Remitter API**.
+   Refer to the [Paysprint Query Remitter   
+   Documentation](https://pay-sprint.readme.io/reference/dmt-casa-queryremitter-api).
+   
+ - The API response contains a parameter called `sdk_token`. This      
+   `sdk_token` is the **encrypted data (`encToken`)** that you should   
+   pass to the `startAccount()` function.
+
+
 ```js
 
 import { startAccount } from  'react-native-finosuvidha-account';
 
-// ...
+// Get encToken from Paysprint Query Remitter API
+const encToken = response.data.sdk_token; // Example
 
-  startAccount(
-     encToken, // string
-     lat, // string
-     lng, // string
-  )
-	.then(res  =>  {
-		console.log(res,  'Response');
-	})
-	.catch(e  =>  {
-		console.log(e,  'Error');
-	});
+// Call startAccount with encToken, latitude, and longitude
+startAccount(encToken, lat, lng)
+  .then(res => {
+    console.log(res, 'Response');
+  })
+  .catch(e => {
+    console.log(e, 'Error');
+  });
+  
 
 ```
+💡**Note:** `encToken` is mandatory for initiating the Fino Suvidha Account Opening flow.
 
 ## Response JSON Object
 
