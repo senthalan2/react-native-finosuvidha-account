@@ -96,9 +96,9 @@ Now, add the following `<provider>` block inside the `<application>` tag of your
  - The `<meta-data>` tag links your `FileProvider` to the `file_paths.xml` file, defining which files your app can share securely.
 
 ### Troubleshooting
-- *Manifest merge conflict on `android:allowBackup` or `android:theme`:*  
+- Manifest merge conflict on `android:allowBackup` or `android:theme`: 
   Ensure you added `tools:replace="android:allowBackup android:theme"` inside the `<application>` tag and `xmlns:tools="http://schemas.android.com tools"` in the `<manifest>` tag.
-- *FileProvider authority conflicts:*  
+- FileProvider authority conflicts:  
   Make sure `${applicationId}.fileprovider` matches your app’s package name and that no other provider in your project uses the same authority.
 
 
