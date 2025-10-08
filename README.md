@@ -101,6 +101,27 @@ Now, add the following `<provider>` block inside the `<application>` tag of your
 - FileProvider authority conflicts:  
   Make sure `${applicationId}.fileprovider` matches your app’s package name and that no other provider in your project uses the same authority.
 
+### Optional Step: Add `.aar` dependency
+
+By default, the package includes the **Suvidha Account Opening Live Mobile SDK** `.aar` file inside `react-native-finosuvidha-account/android/libs`.
+
+If you want to use a different or UAT SDK `.aar` file as listed in the [Suvidha Account Opening Mobile SDKs Drive](https://drive.google.com/drive/folders/1t0r-YgRfvsgk-I3hik3D5F2qnuihYbyj), follow the steps below:
+
+1. Place your `.aar` file in your app project at:
+   `android/app/libs/<sdk_file_name>.aar`
+2. Add a property in your root `android/build.gradle` below the `buildscript`:
+
+```js
+	buildscript {
+		...
+	}
+
+	ext {
+	    SuvidhaAccountOpeningSDKPath= "app/libs/<sdk_file_name>.aar"
+	}
+```
+
+The package will automatically resolve the path and use your `.aar` instead of the bundled one.
 
 ## Usage
 
