@@ -12,6 +12,34 @@ npm  install  react-native-finosuvidha-account
 
 ### Step 2
 
+#### 1. Add `.aar` dependency
+
+Download the required `.aar` from the [Suvidha Account Opening Mobile SDKs Drive](https://drive.google.com/drive/folders/1t0r-YgRfvsgk-I3hik3D5F2qnuihYbyj) and place it in your app module:
+
+`android/app/libs/dmt_casa_live-release.aar`
+
+⚠️ Make sure the filename matches exactly, including extension and case.
+
+#### 2. Configure Gradle to include local `.aar` files
+
+Open your app module's `android/app/build.gradle` and ensure there is a `repositories` block.
+
+- If it exists, add the `flatDir` line inside it:
+
+```js
+repositories {
+    google()
+    mavenCentral()
+    flatDir {
+        dirs 'libs'  // <- This tells Gradle to look in android/app/libs for .aar files
+    }
+}
+```
+
+- If the `repositories` block does not exist, add the whole block above.
+
+### Step 3
+
 #### Update `AndroidManifest.xml`
 
 In your `AndroidManifest.xml` (usually at `android/app/src/main/AndroidManifest.xml`):
@@ -35,12 +63,13 @@ In your `AndroidManifest.xml` (usually at `android/app/src/main/AndroidManifest.
 ```
 
 **💡Note:**
- - `xmlns:tools` must be declared inside the root `<manifest>` tag.
- - `tools:replace` is used to override `android:allowBackup` and `android:theme` values defined by libraries, preventing manifest merge conflicts.
 
-### Step 3
+- `xmlns:tools` must be declared inside the root `<manifest>` tag.
+- `tools:replace` is used to override `android:allowBackup` and `android:theme` values defined by libraries, preventing manifest merge conflicts.
 
-####  Create `file_paths.xml`
+### Step 4
+
+#### Create `file_paths.xml`
 
 Create a new file named `file_paths.xml` at the following location: `android/app/src/main/res/xml/file_paths.xml`. If the `xml` folder doesn’t exist, create it manually.
 
@@ -63,9 +92,9 @@ Add the following content:
 
 **💡 Note:** This file defines which directories your app can share files from through the `FileProvider`.
 
-### Step 4
+### Step 5
 
-####  Add the `FileProvider` Entry
+#### Add the `FileProvider` Entry
 
 Now, add the following `<provider>` block inside the `<application>` tag of your `AndroidManifest.xml`:
 
@@ -92,80 +121,55 @@ Now, add the following `<provider>` block inside the `<application>` tag of your
 ```
 
 **💡 Note:**
- - `${applicationId}` will automatically resolve to your app’s package name (e.g., `com.example.myapp`), so you don’t need to replace it manually.
- - The `<meta-data>` tag links your `FileProvider` to the `file_paths.xml` file, defining which files your app can share securely.
+
+- `${applicationId}` will automatically resolve to your app’s package name (e.g., `com.example.myapp`), so you don’t need to replace it manually.
+- The `<meta-data>` tag links your `FileProvider` to the `file_paths.xml` file, defining which files your app can share securely.
 
 ### Troubleshooting
-- Manifest merge conflict on `android:allowBackup` or `android:theme`: 
+
+- Manifest merge conflict on `android:allowBackup` or `android:theme`:
   Ensure you added `tools:replace="android:allowBackup android:theme"` inside the `<application>` tag and `xmlns:tools="http://schemas.android.com tools"` in the `<manifest>` tag.
 - FileProvider authority conflicts:  
   Make sure `${applicationId}.fileprovider` matches your app’s package name and that no other provider in your project uses the same authority.
 
-### Optional Step: Add `.aar` dependency
-
-By default, the package includes the **Suvidha Account Opening Live Mobile SDK** `.aar` file inside `react-native-finosuvidha-account/android/libs`.
-
-If you want to use a different or UAT SDK `.aar` file as listed in the [Suvidha Account Opening Mobile SDKs Drive](https://drive.google.com/drive/folders/1t0r-YgRfvsgk-I3hik3D5F2qnuihYbyj), follow the steps below:
-
-1. Place your `.aar` file in your app project at:
-   `android/app/libs/<sdk_file_name>.aar`
-2. Add a property in your root `android/build.gradle` below the `buildscript`:
-
-```js
-	buildscript {
-		...
-	}
-
-	ext {
-	    SuvidhaAccountOpeningSDKPath= "app/libs/<sdk_file_name>.aar"
-	}
-```
-
-The package will automatically resolve the path and use your `.aar` instead of the bundled one.
-
 ## Usage
 
-Before calling `startAccount()`, you need to obtain the `encToken`. 
+Before calling `startAccount()`, you need to obtain the `encToken`.
 
- - You can get the `encToken` from the **Paysprint Query Remitter API**.
-   Refer to the [Paysprint Query Remitter   
-   Documentation](https://pay-sprint.readme.io/reference/dmt-casa-queryremitter-api).
-   
- - The API response contains a parameter called `sdk_token`. This      
-   `sdk_token` is the **encrypted data (`encToken`)** that you should   
-   pass to the `startAccount()` function.
-
+- You can get the `encToken` from the **Paysprint Query Remitter API**.
+  Refer to the [Paysprint Query Remitter  
+  Documentation](https://pay-sprint.readme.io/reference/dmt-casa-queryremitter-api).
+- The API response contains a parameter called `sdk_token`. This  
+  `sdk_token` is the **encrypted data (`encToken`)** that you should  
+  pass to the `startAccount()` function.
 
 ```js
-
-import { startAccount } from  'react-native-finosuvidha-account';
+import { startAccount } from 'react-native-finosuvidha-account';
 
 // Get encToken from Paysprint Query Remitter API
 const encToken = response.data.sdk_token; // Example
 
 // Call startAccount with encToken, latitude, and longitude
 startAccount(encToken, lat, lng)
-  .then(res => {
+  .then((res) => {
     console.log(res, 'Response');
   })
-  .catch(e => {
+  .catch((e) => {
     console.log(e, 'Error');
   });
-  
-
 ```
+
 💡**Note:** `encToken` is mandatory for initiating the Fino Suvidha Account Opening flow.
 
 ## Response JSON Object
 
 `startAccount()` Method Reponse
 
-| Key               | Type    | 
-|-------------------|---------| 
-| status            | boolean |  
-| response          | number  |          |
-| message           | string  |
-
+| Key      | Type    |
+| -------- | ------- | --- |
+| status   | boolean |
+| response | number  |     |
+| message  | string  |
 
 ## Contributing
 

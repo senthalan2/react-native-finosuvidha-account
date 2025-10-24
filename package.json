@@ -1,6 +1,6 @@
 {
   "name": "react-native-finosuvidha-account",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This is a React Native module that provides a seamless integration of the Fino Suvidha Account Opening SDK into your React Native Android applications.",
   "main": "./src/index.tsx",
   "types": "./src/index.d.ts",

@@ -71,19 +71,12 @@ repositories {
   mavenCentral()
   google()
   maven { url "https://jitpack.io" }
+  flatDir {
+    dirs 'libs'
+  }
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
-
-def getSuvidhaAarPath(defaultAarPath = 'libs/dmt_casa_live-release.aar') {
-  if (rootProject.hasProperty('SuvidhaAccountOpeningSDKPath')) {
-    // Use the path relative to the user’s project root
-    return new File(rootProject.rootDir, rootProject.property('SuvidhaAccountOpeningSDKPath')).absolutePath
-  } else {
-    // Fallback to the AAR inside your library
-    return new File(projectDir, defaultAarPath).absolutePath
-  }
-}
 
 dependencies {
   implementation "com.facebook.react:react-android"
@@ -104,5 +97,5 @@ dependencies {
   implementation ("me.srodrigo:androidhintspinner:1.0.0")
   implementation ("io.github.chaosleung:pinview:1.4.4")
 
-  implementation (files(getSuvidhaAarPath()))
+   implementation (name: 'dmt_casa_live-release', ext: 'aar')
 }
